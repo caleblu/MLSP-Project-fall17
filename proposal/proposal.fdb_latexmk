@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex proposal"] 1506705734 "proposal.aux" "proposal.bbl" "proposal" 1506705762
+["bibtex proposal"] 1507430227 "proposal.aux" "proposal.bbl" "proposal" 1507430372
   "/usr/local/texlive/2016/texmf-dist/bibtex/bst/base/abbrv.bst" 1292289607 20329 b5fed53e10044d0f8112183785c759b1 ""
-  "proposal.aux" 1506705761 386 43c71abfb98012abc66b639e9bb8d892 ""
+  "proposal.aux" 1507430372 1000 dde5ce487823d029df49825192c7da49 ""
   "proposal.bcf" 0 -1 0 ""
-  "references.bib" 1506705730 115 e95542922c4ebfaf72c13c46cd192d65 ""
+  "references.bib" 1507430038 3365 7979e225932502c5b5971c0ff0224a3b ""
   (generated)
-  "proposal.bbl"
   "proposal.blg"
-["pdflatex"] 1506705761 "proposal.tex" "proposal.pdf" "proposal" 1506705762
+  "proposal.bbl"
+["pdflatex"] 1507430371 "proposal.tex" "proposal.pdf" "proposal" 1507430372
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1246382020 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy8.tfm" 1246382020 1120 200be8b775682cdf80acad4be5ef57e4 ""
@@ -102,10 +102,10 @@
   "/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1469043466 1888048 f2c5faed5981a516f406b2ccc20bff71 ""
   "/usr/local/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt" 1463979169 3873397 413fbfbbedb8e719ddc392043a7add02 ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "proposal.aux" 1506705761 386 43c71abfb98012abc66b639e9bb8d892 ""
-  "proposal.bbl" 1506705734 152 4578241f55c8195af85b021495ad2d55 "bibtex proposal"
-  "proposal.tex" 1506705759 1552 eeb708485a53493229cefc85e6bb916b ""
+  "proposal.aux" 1507430372 1000 dde5ce487823d029df49825192c7da49 ""
+  "proposal.bbl" 1507430227 2539 d96cdd472289b2bcd72645ac8e7d626d "bibtex proposal"
+  "proposal.tex" 1507430370 6330 a6cb54d6729be048b956d339996ef95b ""
   (generated)
-  "proposal.aux"
   "proposal.log"
+  "proposal.aux"
   "proposal.pdf"

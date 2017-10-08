@@ -1,8 +1,66 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
-\bibitem{DUMMY:1}
-C.~K. Lu.
-\newblock {\em The Book without Title}.
-\newblock Dummy Publisher, 2100.
+\bibitem{lyrebird}
+Lyrebird - create a digital copy of voice.
+
+\bibitem{anumanchipalli2012intent}
+G.~K. Anumanchipalli, L.~C. Oliveira, and A.~W. Black.
+\newblock Intent transfer in speech-to-speech machine translation.
+\newblock In {\em Spoken Language Technology Workshop (SLT), 2012 IEEE}, pages
+  153--158. IEEE, 2012.
+
+\bibitem{desai2009voice}
+S.~Desai, E.~V. Raghavendra, B.~Yegnanarayana, A.~W. Black, and K.~Prahallad.
+\newblock Voice conversion using artificial neural networks.
+\newblock In {\em Acoustics, Speech and Signal Processing, 2009. ICASSP 2009.
+  IEEE International Conference on}, pages 3893--3896. IEEE, 2009.
+
+\bibitem{duxans2006voice}
+H.~Duxans, D.~Erro, J.~P{\'e}rez, F.~Diego, A.~Bonafonte, and A.~Moreno.
+\newblock Voice conversion of non-aligned data using unit selection.
+\newblock {\em TC-STAR WSST}, 2006.
+
+\bibitem{erro2007weighted}
+D.~Erro and A.~Moreno.
+\newblock Weighted frequency warping for voice conversion.
+\newblock In {\em Interspeech}, pages 1965--1968, 2007.
+
+\bibitem{jin2016cute}
+Z.~Jin, A.~Finkelstein, S.~DiVerdi, J.~Lu, and G.~J. Mysore.
+\newblock Cute: A concatenative method for voice conversion using
+  exemplar-based unit selection.
+\newblock In {\em Acoustics, Speech and Signal Processing (ICASSP), 2016 IEEE
+  International Conference on}, pages 5660--5664. IEEE, 2016.
+
+\bibitem{kawahara1997speech}
+H.~Kawahara.
+\newblock Speech representation and transformation using adaptive interpolation
+  of weighted spectrum: vocoder revisited.
+\newblock In {\em Acoustics, Speech, and Signal Processing, 1997. ICASSP-97.,
+  1997 IEEE International Conference on}, volume~2, pages 1303--1306. IEEE,
+  1997.
+
+\bibitem{machado2010voice}
+A.~F. Machado and M.~Queiroz.
+\newblock Voice conversion: A critical survey.
+\newblock {\em Proc. Sound and Music Computing (SMC)}, pages 1--8, 2010.
+
+\bibitem{mohammadi2017verview}
+S.~H. Mohammadi and A.~Kain.
+\newblock An overview of voice conversion systems.
+\newblock {\em Speech Communication}, 2017.
+
+\bibitem{stylianou2009voice}
+Y.~Stylianou.
+\newblock Voice transformation: a survey.
+\newblock In {\em Acoustics, Speech and Signal Processing, 2009. ICASSP 2009.
+  IEEE International Conference on}, pages 3585--3588. IEEE, 2009.
+
+\bibitem{toda2007voice}
+T.~Toda, A.~W. Black, and K.~Tokuda.
+\newblock Voice conversion based on maximum-likelihood estimation of spectral
+  parameter trajectory.
+\newblock {\em IEEE Transactions on Audio, Speech, and Language Processing},
+  15(8):2222--2235, 2007.
 
 \end{thebibliography}

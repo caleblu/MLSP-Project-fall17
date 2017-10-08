@@ -38,7 +38,7 @@
 
 % The \vspace command inside the \title command is used to reduce
 % the space between the title and the author lines.
-\title{No idea what's it gonna be}
+\title{Robot Parrot}
 \author{
 	Caleb Kaiji Lu \\
 	{\tt caleb.lu@sv.cmu.edu}
@@ -58,11 +58,34 @@
 
 \maketitle
 
-\section{Introduction}
-\section{Project Idea}
-\section{Project Background}
-Random citation \cite{DUMMY:1} embedded in text.
-\section{Approaches}
+\section{Idea Summary}
+Our project, \textit{Robot Parrot}, aims to implement speech-to-speech conversion for only one subject, X. Specifically, we want any arbitrary sentence to be produced in X's voice. Generalized to reproducing any voice from any input voice, such a technology has a range of implications, from voice dubbing in the entertainment industry to personalizing a computer interface. We will generate the original voice using a Text-to-Speech package that generates a machine-voice.\\
+\\
+According to the literature, speech-to-speech conversion has been an active research area for the past 40 years, with current methods often relying on DNN \cite{desai2009voice} or MLE \cite{toda2007voice}. According to Mohammadi's paper \cite{mohammadi2017verview}, voice conversion ``systems still exhibit deficiencies in accurately mimicking a target speaker spectrally and prosodically, and simultaneously maintaining high speech quality.'' As such, given the short nature of this project, we do not expect to implement a full solution. Instead we are narrowing down our goal to the specific task of converting a particular machine voice to a single human voice. 
+
+\section{Literature Review}
+Voice conversion modifies an audio with source speaker voice to a target speaker voice without changing the content. Currently, a company known as \textit{Lyrebird} \cite{lyrebird} is producing software capable of translating machine voices to any human voice at a reasonable quality after a sample of one minute of speaking. It can also be applied in voice conversion between multiple languages \cite{anumanchipalli2012intent}.\\
+\\
+Many papers have been written on this topic \cite{stylianou2009voice}\cite{mohammadi2017verview}. One approach of voice conversion is to learn the source---target relationship from a number of utterances \cite{stylianou2009voice}. There are parametric methods \cite{kawahara1997speech} which model a mapping function from a source to target in some feature spaces. An alternative approach is called unit selection\cite{duxans2006voice}\cite{jin2016cute}. The idea is to select the segments from training sets of a target voice, which correspond to the speech content of source voice, then concatenating the segments with smooth transition. \\
+\\
+The training process can be either text-dependent or text-independent\cite{duxans2006voice}. Text-dependent require audio of same sentences of both source and target, then use Dynamic Time Warping to align the recordings and get the mapped acoustic features. Text-independent does not require recordings of the same sentences, or even the same language. Audios are segmented into frames and clustered into groups of similar features. And the acoustic features of source and target are mapped with same categories. The mapping function can be found in different ways: signal processing, linear algebra, machine learning(both discriminative model, e.g., deep learning,  and generative model, e.g., GMM)\cite{machado2010voice}. We intend to perform text-dependent speech conversion.\\
+\\
+Based on the breadth of current and past research, it appears there is no established solution to this problem in either academia nor industry. \textit{Lyrebird} comes close, but it is often still possible to distinguish its audio from the human speaker. As such, we hope to produce reasonable results, but we do not expect speech conversion to be perfect.
+
+\section{Project Proposal}
+Our project goal is to perform speech-to-speech conversion on a machine voice to a human voice. Our project consists of several stages:
+\begin{enumerate}
+\item Implement a text-to-speech package to generate machine voice waveforms.
+\item Record a particular speaker X saying a number of sentences.
+\item Identify features in speech that carry word information as well as carry the unique ``voice'' of the speaker.
+\item Use machine learning  to train on the recordings.
+\item Generate new sentences with the text-to-speech package.
+\item Use the machine to ``reproduce'' the speech in the voice of X.
+\end{enumerate}
+The bulk of the project time will likely be spent in identifying important features as well as in training and testing the machine. Based on our literature review, possible acoustic features could be fundamental frequency, formants, MFCC, and etc. \\
+\\
+While evaluation of this project may be quite difficult, we think that it would be impressive to produce a series of sentences through speech-to-speech and compare those to sentences spoken by X. To do so, we will use subjective evaluation, where a number of subjects will listen to each recordings and using 5 value grading of quality of converted recordings and similarity to the real recordings. We will use a standard test proposed by TC-STAR\cite{erro2007weighted} projects using MOS (Mean of Score) as a measure of both quality and similarity. We expected to get above 3.0 on quality and 2.5 on similarity MOS.
+
 \bibliographystyle{abbrv}
 \bibliography{references}
 
