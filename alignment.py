@@ -1,7 +1,6 @@
 from dtw import dtw
 from numpy.linalg import norm
 import numpy as np
-from mfcc import audiofile_to_input_vector
 
 def dist_fn(x, y):
     return norm(x - y, ord = 1)
@@ -17,7 +16,8 @@ def align(src, tgt):
     return jnt_vector
 
 if __name__=="__main__":
-    src = audiofile_to_input_vector("vcc2016_training/SF1/100001.wav", 12, 0)
-    tgt = audiofile_to_input_vector("vcc2016_training/TM1/100001.wav", 12, 0)
-    jnt_vector = align(src, tgt)
-    print jnt_vector
+    # from mfcc import audiofile_to_input_vector
+    # src = audiofile_to_input_vector("vcc2016_training/SF1/100001.wav", 12, 0)
+    # tgt = audiofile_to_input_vector("vcc2016_training/TM1/100001.wav", 12, 0)
+    # jnt_vector = align(src, tgt)
+    # print jnt_vector
