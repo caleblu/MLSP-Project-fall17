@@ -1,56 +1,54 @@
-from sklearn.mixture import GaussianMixture
+import sklearn.mixture
 import numpy as np
 
 def train_GMM(jnt):
     """
     train GMM with joint vectors
     :param jnt: joint vector of spectral features
-    :return: trained gmm model
+    :return: trained GMM model
     """
-    gmm = GaussianMixture(n_components=10, covariance_type='full')
-    gmm.fit(jnt)
-    return gmm
+    GMM = sklearn.mixture.GaussianMixture(n_components=10, covariance_type='full')
+    GMM.fit(jnt)
+    return GMM
 
-def get_density_x(src, gmm):
+def get_density_x(src, GMM):
     """
     :param src: source spectral features
-    :param gmm: trained GMM model
+    :param GMM: trained GMM model
     :return: get the conditional probability that src belong to a component
     """
-    mid = gmm.means_.shape[1] / 2
-    x_mean = gmm.means_[:, 0:mid]
-    x_cov = gmm.covariances_[:, :mid, :mid]
-    x_gmm = GaussianMixture(n_components=10, covariance_type='full')
-    x_gmm.covariances_ = x_cov
-    x_gmm.means_ = x_mean
-    return x_gmm.predict_proba(src)
+    mid = GMM.means_.shape[1] / 2
+    x_GMM = sklearn.mixture.GaussianMixture(n_components=10, covariance_type='full')
+    x_GMM.covariances_ = GMM.covariances_[:, :mid, :mid]
+    x_GMM.means_ = GMM.means_[:, 0:mid]
+    x_GMM.weights_ = GMM.weights_
+    x_GMM.precisions_cholesky_ =  sklearn.mixture.gaussian_mixture._compute_precision_cholesky(x_GMM.covariances_, 'full')
+    return x_GMM.predict_proba(src)
 
-def get_mean_tgt(gmm):
+def get_mean_tgt(GMM):
     """
-    :param gmm: trained GMM model
+    :param GMM: trained GMM model
     :return: get the mean of the target spectral features of each component
     """
-    mid = gmm.means_.shape[1] / 2
-    y_mean = gmm.means_[:, mid:]
+    mid = GMM.means_.shape[1] / 2
+    y_mean = GMM.means_[:, mid:]
     return y_mean
 
-def get_cross_cov(gmm):
+def get_cross_cov(GMM):
     # TODO use full conversion instead of VQ
     pass
 
-def predict(src, gmm):
+def predict_GMM(src, GMM):
     """
     predict target value given src spectral features
     :param src: source spectral features
-    :param gmm: trained GMM model
+    :param GMM: trained GMM model
     :return: predicted target spectral features
     """
-    m = gmm.n_components
-    y = np.zeros(src.shape)
-    density_x = get_density_x(src, gmm)
-    v = get_mean_tgt(gmm)
-    for i in range(m):
-        y = y + density_x[i] * v[i]
+    m = GMM.n_components
+    density_x = get_density_x(src, GMM)
+    v = get_mean_tgt(GMM)
+    y = np.dot(density_x,v)
     return y
 
 if __name__=="__main__":
