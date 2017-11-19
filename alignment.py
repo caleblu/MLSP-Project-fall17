@@ -1,7 +1,6 @@
 from dtw import dtw
 from numpy.linalg import norm
 import numpy as np
-from mfcc import audiofile_to_input_vector
 
 def dist_fn(x, y):
     return norm(x - y, ord = 1)
