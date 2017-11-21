@@ -76,28 +76,28 @@
 
 \section{Project Recap}
 
-There is a strong interest in voice conversion, which is defined as modifying a source speaker's voice to sound as though it were produced by a target speaker. Such technology can have applications ranging from entertainment to speaker recognition. It would be beneficial to games, and videos to reproduce the voices of famous actors or actresses for their shows, especially in translating the shows to different languages. It may also help in the grieving process---how many people wish they could hear a loved one's voice one last time after they pass? More sinisterly, such technology could be used by politicians to discredit their enemies by creating false audio in their voice admitting to embarrassing or illegal activities. In our project, we delve into a fundamental algorithm in the field and our work on reproducing and possibly improving it.
+There is a strong interest in voice conversion, which is defined as modifying a source speaker's voice to sound as though it were produced by a target speaker. Such technology can have applications ranging from entertainment to speaker recognition. It would be beneficial to games and videos to reproduce the voices of famous actors or actresses for their shows, especially in translating the shows to different languages. It may also help in the grieving process---how many people wish they could hear a loved one's voice one last time after they pass? More sinisterly, such technology could be used by politicians to discredit their enemies by creating false audio in their voice admitting to embarrassing or illegal activities. In our project, we delve into a fundamental algorithm in the field and our work on reproducing and possibly improving it.
 
 \section{Feature Extraction}
-Unfortunately for voice conversion technology, speakers have a variety of individual characteristics that affect their speech. Human vocal tract and speaking patterns are highly individualized and humans have evolved a strong ability to discriminate between different speakers [6].  Speaking rate, pitch contour, .etc are all various features that help to identify individual speakers. However, some of the most important characteristics of speaker identity is the statistical distribution of the speech envelope [Reynolds]. Based on this concept and previous work, we will focus on voice conversion using the speech envelope as our primary feature.
+Unfortunately for voice conversion technology, speakers have a variety of individual characteristics that affect their speech. Human vocal tract and speaking patterns are highly individualized and humans have evolved a strong ability to discriminate between different speakers [6].  Speaking rate, pitch contour, etc are all various features that help to identify individual speakers. However, some of the most important characteristics of speaker identity are embedded in the statistical distribution of the speech envelope [Reynolds]. Based on this concept and previous work, we will focus on voice conversion using the speech envelope as our primary feature.
  
-However, human auditory response complicates analysis and reconstruction using only speech envelopes. Specifically, human perception of pitch, or frequency, follows a nonlinear scale. When humans judge whether pitches are equal distances from one another, they select frequencies over larger and larger intervals over about 500 Hz. Based on this phenomenon, the Mel scale was developed [2]. A Mel-filter bank can be created to simulate the filtering occurring in the human auditory system with a series of overlapping triangular bandpass filters, centered on the Mel frequencies. In order to make this useful in signal processing the following algorithm can be used:
+However, human auditory response complicates analysis and reconstruction using only speech envelopes. Specifically, human perception of pitch, or frequency, follows a nonlinear scale. When humans judge whether pitches are equal distances from one another, they select frequencies over larger and larger intervals, starting around 500 Hz. Based on this phenomenon, the Mel scale was developed [2]. A Mel-filter bank can be created to simulate the filtering occurring in the human auditory system with a series of overlapping triangular bandpass filters, centered on the Mel frequencies. In order to make this useful in signal processing the following algorithm can be used:
 (1)  Take the Fourier Transform of the speech signal to get the frequency-space
 (2)  Filter the power spectrum to the Mel scale with the triangular windows
 (3)  Take the logarithm of the powers to match human loudness perception
 (4)  Take the discrete cosine transform of the logarithm powers.
  The resulting Mel cepstrum will be used as the speech envelope feature.
  
-Of additional importance is the actual voiced frequencies. Human speech consists of both ``voiced'' and ``unvoiced'' portions. Voiced sounds are produced by vocal cords, have more amplitude, and can be represented by near-constant frequencies of a particular duration. The maximum voiced frequency tends to be cut off at about 4 kHz. Above this range, there are ``unvoiced'' sounds, which are non-periodic sounds caused by air pressed through a constricted vocal tract. Due to the unperiodic and short-time nature of such events, they tend to have more frequency components and those they have tend to be higher [1]. Studies have shown voiced speech to play a larger role in speaker individuality than unvoiced speech, so our conversion will focus on the voiced portions of speech.
+Of additional importance is the actual voiced frequencies. Human speech consists of both ``voiced'' and ``unvoiced'' portions. Voiced sounds are produced by vocal cords, have more amplitude, and can be represented by near-constant frequencies of a particular duration. The maximum voiced frequency tends to be cut off at about 4 kHz. Above this range, there are ``unvoiced'' sounds, which are non-periodic sounds caused by air pressed through a constricted vocal tract. Due to the unperiodic and short-time nature of such events, they tend to have more frequency components and those they have tend to be higher [1]. Studies have shown voiced speech to play a larger role in speaker individuality than unvoiced speech [3], so our conversion will focus on the voiced portions of speech.
 
 \section{Model and Algorithm}
-Gaussian Mixture Models (GMM) have been shown to be a reliable choice for voice conversion [3]. Based on the complexity of this field and the duration of our project, we chose to implement an algorithm based on a foundational paper in the field. Specifically, Stylianou[3]'s foundational work, on which more advanced voice conversion technology is based. For instance, given good results from Stylianou's paper, we could look into the paper by Toda et al[4].  The algorithm of Stylianou's paper is essentially as follows:
+Gaussian Mixture Models (GMMs) have been shown to be a reliable choice for voice conversion [3]. Based on the complexity of this field and the duration of our project, we chose to implement an algorithm based on a foundational paper in the field. Specifically, Stylianou's foundational work [3], on which more advanced voice conversion technology is based. For instance, given good results from Stylianou's paper, we could look into the paper by Toda et al[4].  The algorithm of Stylianou's paper is essentially as follows:
 \begin{enumerate}
-\item Create the ``Harmonic + Noise Mode'':
+\item Create the ``Harmonic + Noise Mode'' model of the speech:
 \begin{enumerate}
 \item Run Fourier Transforms over the source and target speech in 10 ms frames
-\item Select only the frequencies extending from 0 -- 4 kHz (voiced speech)
-\item To capture the noise, convert the voiced speech back to the time domain and subtract it from the original signal
+\item Select only the frequencies extending from 0 -- 4 kHz (voiced speech).
+\item To capture the noise, convert the voiced speech back to the time domain and subtract it from the original signal.
 \end{enumerate}
 
 \item Calculate the Bark cepstrum:
@@ -108,34 +108,38 @@ Gaussian Mixture Models (GMM) have been shown to be a reliable choice for voice 
 
 \item Align the target and source speaker's cepstrums using dynamic time warping, a nonlinear method of finding optimal alignment between two time-series data [5]:
 \begin{enumerate}
-\item compute the matrix of squared distances between each two points
-\item To discover the warp, find the path through the matrix that minimizes the total cumulative distances between the two sequences
-\item Set the timeseries data of the distorted signal to match the warp path
+\item Compute the matrix of squared distances between each two points.
+\item To discover the warp, find the path through the matrix that minimizes the total cumulative distances between the two sequences.
+\item Set the timeseries data of the distorted signal to match the warp path.
 \end{enumerate}
 
-\item Train the GMM:
+\item Generate the GMM on source and target training data:
 \begin{enumerate}
-\item A Gaussian mixture model represents the data as a weighted sum of Gaussian distributions, each with a characteristic mean and variance.
+\item A Gaussian Mixture Model represents the data as a weighted sum of Gaussian distributions, each with a characteristic mean and variance.
 \item Maximum Likelihood Estimation iteratively generates a GMM for the aligned features of the target and source speaker's audio.
 \end{enumerate}
 
-\item Convert the source cepstrum to the matching target cepstrum using the GMM conversion function
-\item Convert the cepstrum back to an speech audio:
+\item Convert a source cepstrum to the matching target cepstrum using the  conversion function:
 \begin{enumerate}
-\item Convert the cepstrum to the frequency domain
-\item Match the average fundamental frequency to the target
-\item Match the articulation rhythm to the target 
-\item Convert the spectrogram back to the time domain
+\item The primary component of the conversion function is a conditional probability built on the GMM. From the GMM, it is possible to calculate the probability of a target Gaussian given the source speech cepstrum.
+\item Different conversion functions are available. A general discussion is below.
+\end{enumerate}
+
+\item Convert the cepstrum back to speech audio:
+\begin{enumerate}
+\item Convert the cepstrum to the frequency domain.
+\item Match the average fundamental frequency to the target.
+\item Match the articulation rhythm to the target.
+\item Convert the spectrogram back to the time domain.
 \end{enumerate}
 
 \item Modify the noise with two fixed filters (one for voiced frames and one for unvoiced frames) and add it to the resulting signal
 \end{enumerate}
 
-Training the GMM conversion function deserves special treatment due to its complexity. The paper by Stylianou[3] proposes and compares three different conversion methods: Full, Diagonal, and VQ Conversion. As we know from the class, each class in the GMM model is defined by its parameters, mean and variance. The probability of a target speech class given the source speech vector is obtained from those GMM parameters. In VQ Conversion, the conversion function is a weighted sum of each class probability given the source speech vector times the mean target speech vector for the respective class. This is the simplest case, and has the worst performance.  In Full Conversion, the conversion function is also a sum of the VQ conversion with the weighted cross-covariance matrix of the source and target vectors. It is weighted by , the inverse covariance times the difference of the source speech vector with the mean for a particular class i. Full Conversion performs the best, but is also the most compute-intensive. In Diagonal Conversion, the cross-covariance of the source and target vectors is set to be diagonal, which is a simplification that improves computational load at the expense of performance, although it still performs better than the VQ method. 
+Training the GMM conversion function deserves special treatment due to its complexity. The paper by Stylianou[3] proposes and compares three different conversion methods: Full, Diagonal, and VQ Conversion. As we know from this course, each class in the GMM model is defined by its parameters: mean and variance. The probability of a target speech class given the source speech vector is obtained from those GMM parameters. In VQ Conversion, the conversion function is a weighted sum of each class probability given the source speech vector times the mean target speech vector for the respective class. This is the simplest case, and has the worst performance.  In Full Conversion, the conversion function is a sum of the VQ conversion and the weighted cross-covariance matrix of the source and target vectors. It is weighted by the inverse covariance times the difference of the source speech vector with the mean for a particular class i. Full Conversion performs the best, but is also the most compute-intensive. In Diagonal Conversion, the cross-covariance of the source and target vectors is set to be diagonal, which is a simplification that improves computational load at the expense of performance, although it still performs better than the VQ method. 
 
 \section{Future Work}
- Due to the complexity of many of the methods listed above, implementations in python libraries were used for the purpose of this project. Our code currently performs Diagonal Conversion. However, Full Conversion is known to provide better results. As this is the case, we will implement the Full Conversion process.
-In future work, we should also implement improvements on Stylianou's paper, such as those proposed by Toda et al [4]. Once we have caught up with the present state of research, we could focus our efforts on discovering the remaining causes of sub-optimal performance and work to mitigate them. 
+ Due to the complexity of many of the methods listed above, available python libraries were used for the purpose of this project. Our code currently performs Diagonal Conversion. However, Full Conversion is known to provide better results. As this is the case, we will implement the Full Conversion process. In future work, we should also implement improvements on Stylianou's paper, such as those proposed by Toda et al [4]. Once we have caught up with the present state of research, we could focus our efforts on discovering the remaining causes of sub-optimal performance and work to mitigate them. 
 
 \section*{References}
 
