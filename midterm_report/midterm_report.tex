@@ -131,8 +131,10 @@ Based on the complexity of this field and the duration of our project, we chose 
 \item Modify the noise with two fixed filters (one for voiced frames and one for unvoiced frames) and add it to the resulting signal
 \end{enumerate}
 
+For the implementation, we now finished the feature extraction for cepstrums and fundamental frequency, align the source and target feature using dynamic time warping, GMM training and VQ conversion function. We use the dataset from VCC2016[8], where contains 5 source speakers and 5 target speakers. Each speakers utters the same sentences set consisting of 162 sentences. The sampling rate is 16 kHz, and stored in 16-bit format. Due to the complexity of many of the methods listed above, available python libraries were used for the purpose of this project including dtw, pyworld, pysptk, and sklearn.
+
 \section{Future Work}
- Due to the complexity of many of the methods listed above, available python libraries were used for the purpose of this project. Our code currently performs VQ Conversion. However, Full Conversion is known to provide better results. As this is the case, we will implement the Full Conversion process. In future work, we should also implement improvements on Stylianou's paper, such as those proposed by Toda et al [4]. Once we have caught up with the present state of research, we could focus our efforts on discovering the remaining causes of sub-optimal performance and work to mitigate them.
+  Our code currently performs VQ Conversion. However, Full Conversion is known to provide better results. As this is the case, we will implement the Full Conversion process. In future work, we should also implement improvements on Stylianou's paper, such as those proposed by Toda et al [4]. Once we have caught up with the present state of research, we could focus our efforts on discovering the remaining causes of sub-optimal performance and work to mitigate them.
 
 \section*{References}
 
@@ -152,5 +154,6 @@ Based on the complexity of this field and the duration of our project, we chose 
  
 [7] Reynolds Douglas A., and Richard C. Rose, Robust Text-Independent Speaker Identification Using Gaussian Mixture Speaker Models. {\it IEEE Transactions on Speech and Audio Processing}, Vol. 3, No. 1, pp. 72--83 (1995).
 
+[8] Voice Conversion Challenges 2016. http://vc-challenge.org/vcc2016/summary.html
 
 \end{document}
