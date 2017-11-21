@@ -1,0 +1,4 @@
+.DS_Store
+*.pyc
+vcc2016_training/
+test/
