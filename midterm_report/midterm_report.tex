@@ -101,7 +101,7 @@ Once we have the GMMs models, the next step is to use GMMs for converting source
     \begin{tabular}{ | c | p{6.5cm}  | c | c |}
     \hline
     Conversion & Idea & Performance & computation\\ \hline
-    VQ & a weighted sum of each class probability given the source speech vector times the mean target speech vector for the respective class. & worst & simple\\ \hline
+    VQ & a weighted sum of each class probability given the source speech vector times the mean target speech vector for the respective class. & poor & simple\\ \hline
     Full & a sum of the VQ conversion and the weighted cross-covariance matrix of the source and target vectors. It is weighted by the inverse covariance times the difference of the source speech vector with the mean for a particular class i. & best & costly\\ \hline
     Diagonal & the cross-covariance of the source and target vectors is set to be diagonal & better than VQ & better than Full\\ \hline
     \end{tabular}
@@ -131,7 +131,7 @@ Based on the complexity of this field and the duration of our project, we chose 
 \item Modify the noise with two fixed filters (one for voiced frames and one for unvoiced frames) and add it to the resulting signal
 \end{enumerate}
 
-For the implementation, we now finished the feature extraction for cepstrums and fundamental frequency, align the source and target feature using dynamic time warping, GMM training and VQ conversion function. We use the dataset from VCC2016[8], where contains 5 source speakers and 5 target speakers. Each speakers utters the same sentences set consisting of 162 sentences. The sampling rate is 16 kHz, and stored in 16-bit format. Due to the complexity of many of the methods listed above, available python libraries were used for the purpose of this project including dtw, pyworld, pysptk, and sklearn.
+So far, we implemented the feature extraction for cepstrums and fundamental frequency, align the source and target feature using dynamic time warping, GMM training and VQ conversion function. We used the dataset from VCC2016[8], which contains 5 source speakers and 5 target speakers. Each speaker utters the same sentence set of 162 sentences. The sampling rate is 16 kHz, and stored in 16-bit format. Due to the complexity of the methods listed above, various python libraries were used for the purpose of this project including dtw, pyworld, pysptk, and sklearn.
 
 \section{Future Work}
   Our code currently performs VQ Conversion. However, Full Conversion is known to provide better results. As this is the case, we will implement the Full Conversion process. In future work, we should also implement improvements on Stylianou's paper, such as those proposed by Toda et al [4]. Once we have caught up with the present state of research, we could focus our efforts on discovering the remaining causes of sub-optimal performance and work to mitigate them.
