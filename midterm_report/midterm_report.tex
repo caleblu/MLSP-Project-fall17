@@ -20,6 +20,7 @@
 \usepackage{amsfonts}       % blackboard math symbols
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
+\usepackage{graphicx}
 
 \title{Midterm Report}
 
@@ -109,7 +110,7 @@ Once we have the GMMs models, the next step is to use GMMs for converting source
 
 \section{Algorithm and Implementation}
 
-Based on the complexity of this field and the duration of our project, we chose to implement an algorithm based on a foundational paper in the field. Specifically, Stylianou's foundational work [3], on which more advanced voice conversion technology is based. For instance, given good results from Stylianou's paper, we could look into the paper by Toda et al[4].  The algorithm of Stylianou's paper is essentially as follows:
+Based on the complexity of this field and the duration of our project, we chose to implement an algorithm based on a foundational paper in the field. Specifically, Stylianou's foundational work [3], on which more advanced voice conversion technology is based. For instance, given good results from Stylianou's paper, we could look into the paper by Toda et al[4]. The algorithm of Stylianou's paper is essentially as follows:
 \begin{enumerate}
 \item Create the ``Harmonic + Noise Mode'' model of the speech
 
@@ -130,6 +131,13 @@ Based on the complexity of this field and the duration of our project, we chose 
 
 \item Modify the noise with two fixed filters (one for voiced frames and one for unvoiced frames) and add it to the resulting signal
 \end{enumerate}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{algorithm.png}
+\caption{Voice conversion algorithm workflow}\label{fig:algo}
+\end{figure}
+
 
 So far, we implemented the feature extraction for cepstrums and fundamental frequency, align the source and target feature using dynamic time warping, GMM training and VQ conversion function. We used the dataset from VCC2016[8], which contains 5 source speakers and 5 target speakers. Each speaker utters the same sentence set of 162 sentences. The sampling rate is 16 kHz, and stored in 16-bit format. Due to the complexity of the methods listed above, various python libraries were used for the purpose of this project including dtw, pyworld, pysptk, and sklearn.
 
