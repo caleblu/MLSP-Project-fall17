@@ -57,12 +57,13 @@ def mcep_alignment(datapath, src_path, tgt_path, jnt_path, test_start,f0_ratio=1
         pd.DataFrame(np.mean(tgt,0)).to_csv("result/%d_target_mcep_align_mean.csv" % test_start, header=None, index=None)
         pd.DataFrame(np.mean(full,0)).to_csv("result/%d_full_mcep_align_mean.csv" % test_start, header=None, index=None)
         pd.DataFrame(np.mean(vq,0)).to_csv("result/%d_vq_mcep_align_mean.csv" % test_start, header=None, index=None)
-    return src, tgt, full, vq
+    return src_mcep, tgt_mcep, full_mcep, vq_mcep
 
 if __name__=="__main__":
-    full = evaluate_test("vcc2016_training/", "TM1/", "SF1_TM1_150/", 100151, 100161, 'FULL', 0.56)
-    vq = evaluate_test("vcc2016_training/", "TM1/", "SF1_TM1_150/", 100151, 100161, 'VQ', 0.56)
-    origin = evaluate_origin("vcc2016_training/", "SF1/","TM1/", 100151, 100161)
-
-    for v in zip(origin, full, vq):
-        print v
+    mcep_alignment("vcc2016_training/", "SF1/","TM1/", "SF1_TM1_150/", 100151, 0.56)
+    # full = evaluate_test("vcc2016_training/", "TM1/", "SF1_TM1_150/", 100151, 100161, 'FULL', 0.56)
+    # vq = evaluate_test("vcc2016_training/", "TM1/", "SF1_TM1_150/", 100151, 100161, 'VQ', 0.56)
+    # origin = evaluate_origin("vcc2016_training/", "SF1/","TM1/", 100151, 100161)
+    #
+    # for v in zip(origin, full, vq):
+    #     print v

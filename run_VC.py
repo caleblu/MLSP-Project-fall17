@@ -37,7 +37,7 @@ def convert_test(datapath, speaker_path, jnt_path, test_start, test_end, GMM_mod
         audio_path = datapath + speaker_path + str(i) + '.wav'
         if not os.path.exists('result/' + jnt_path):
             os.makedirs('result/' + jnt_path)
-        output_path = 'result/' + jnt_path + str(i) + '_convert_%.2f.wav' % f0_ratio
+        output_path = 'result/' + jnt_path + str(i) + '_convert_%.2f_%s.wav' % (f0_ratio, method)
         convert(audio_path, output_path, GMM_model, method, f0_ratio)
 
 def dump(d, path):
@@ -68,11 +68,11 @@ def main():
 
     # get GMM_model from saved files, otherwise train the model and save it.
     if os.path.isfile(gmm_path):
-        print "loading gmm from" + gmm_path
+        print "loading gmm from " + gmm_path
         GMM_model = joblib.load(gmm_path)
     else:
         if os.path.isfile(jnt_path):
-            print "loading joint vector from" + jnt_path
+            print "loading joint vector from " + jnt_path
             jnt_vct = load(jnt_path)
         else:
             print "loading mcep features"
@@ -88,7 +88,7 @@ def main():
         joblib.dump(GMM_model, gmm_path)
 
     if os.path.isfile(f0_path):
-        print "loading f0 ratio from" + f0_path
+        print "loading f0 ratio from " + f0_path
         f0_ratio = load(f0_path)
     else:
         print "calculating f0 ratio"

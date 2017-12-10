@@ -11,4 +11,3 @@ def extract_features(path):
     ap = pw.d4c(x, f0, time_axis, fs)
     return f0, mcep, ap, fs
 
-
