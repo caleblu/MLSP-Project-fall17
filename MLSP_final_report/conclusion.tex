@@ -1,0 +1,8 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+
+Our work is an implementation of the voice conversion work-flow described by Stylianou et al \cite{stylianou1998continuous}. We extracted the fundamental frequency $f_0$, calculated Mel-frequency cepstrum $mcep$, performed dynamic time wrapping (DTW) to align the speech of our target and source speaker in the training data, calculated VQ and Full Conversion algorithms using Gaussian Mixture Models, and finally performed the $F_0$ transformation to match the fundamental frequency to the target speaker. Our training set includes 150 parallel audios from a female source and a male target, while we have a separate test set for evaluation. Our test data has some fairly impressive results. Future work would first build upon our current results by implementing improvements found in several papers that base their work on Stylianou et al. We may then begin work to improve their algorithms, perhaps by focusing more on unvoiced frequencies or lower-frequency components, such as the rhythm of the speech.
+
+The source code of our project is hosted on GitHub at \url{https://github.com/caleblu/MLSP-Project-fall17}.
+

@@ -1,4 +1,3 @@
-__author__ = 'gardenia'
 from features import extract_features
 from alignment import align_one
 import numpy as np
