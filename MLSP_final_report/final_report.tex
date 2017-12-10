@@ -1,0 +1,71 @@
+% Template for ICASSP-2018 paper; to be used with:
+%          spconf.sty  - ICASSP/ICIP LaTeX style file, and
+%          IEEEbib.bst - IEEE bibliography style file.
+% --------------------------------------------------------------------------
+\documentclass{article}
+\usepackage{spconf,amsmath,graphicx}
+
+% Example definitions.
+% --------------------
+\def\x{{\mathbf x}}
+\def\L{{\cal L}}
+
+% Title.
+% ------
+\title{Gaussian Mixture Model for Voice Conversion}
+%
+% Single address.
+% ---------------
+
+\name{Caleb Kaiji Lu  \and \textit{Tyler Nuanes} \and \textit{Nanshu Wang} \and \textit{Serhan Oztekin}}
+\address{Carnegie Mellon University\\School of Electrical and Computer Engineering\\23, NASA Research Park, Moffett Field, CA 94035}
+%
+% For example:
+% ------------
+%\address{School\\
+%	Department\\
+%	Address}
+%
+% Two addresses (uncomment and modify for two-address case).
+% ----------------------------------------------------------
+%\twoauthors
+%  {A. Author-one, B. Author-two\sthanks{Thanks to XYZ agency for funding.}}
+%	{School A-B\\
+%	Department A-B\\
+%	Address A-B}
+%  {C. Author-three, D. Author-four\sthanks{The fourth author performed the work
+%	while at ...}}
+%	{School C-D\\
+%	Department C-D\\
+%	Address C-D}
+%
+\begin{document}
+%\ninept
+%
+\maketitle
+
+\begin{abstract}
+Voice conversion is defined as modifying a source speaker’s voice to sound as though it were produced by a target speaker, a problem challenging enough  that a fully successful algorithm has so far proved elusive. Speech signals are created in a complex process involving vibrations of vocal chords and frequency filtering by the vocal tract. In addition, our auditory process is nonlinear, involving multiple frequency bands in the cochlea. Humans pick up characteristics of individual voices in frequencies ranging from 3 Hz to 10 kHz. Instead of attempting to develop a new algorithm, we focused our project on delving into a fundamental algorithm in the field and worked to reproduce it. Our training set includes 150 parallel audios from a female source and a male target. The results show that the \textit{MelCD}, a measure of distortion, of Full Conversion is 37.66,  and \textit{MelCD} of VQ Conversion is 39.53. The Full Conversion reduced  \textit{MelCD} by 4.77 dB compared to the original distortion between source and target, a significant improvement. 
+\end{abstract}
+%
+\begin{keywords}
+voice conversion, signal processing, machine learning
+\end{keywords}
+\input{introduction}
+\input{background}
+\input{approach}
+\input{results}
+\input{conclusion}
+
+
+% References should be produced using the bibtex program from suitable
+% BiBTeX files (here: strings, refs, manuals). The IEEEbib.bst bibliography
+% style file from IEEE produces unsorted bibliography list.
+% -------------------------------------------------------------------------
+
+\bibliographystyle{IEEEbib}
+
+ 
+\bibliography{references}
+
+\end{document}

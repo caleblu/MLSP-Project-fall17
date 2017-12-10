@@ -1,0 +1,65 @@
+\documentclass[11pt]{article}
+\usepackage[left=1in, right=1in, top=1in, bottom=1in, includefoot]{geometry}		% Set margins to 1 inch.
+
+% Reduce the vertical space above the title.
+\usepackage{titling}
+\setlength{\droptitle}{-8ex}
+
+\usepackage{amsmath}				% For \text{}
+
+\usepackage{amsthm}				% For proof environment
+\usepackage{cleveref}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+
+\usepackage{amsfonts}				% For \mathbb{}
+
+\usepackage{graphicx}
+\usepackage{floatrow}
+
+\usepackage{nccmath}				% For fleqn environment
+
+\usepackage{color}
+\usepackage{xcolor}
+
+\usepackage{bm}					% For \bm{}
+\usepackage{physics}				% For \norm{}
+
+\usepackage{tabularx}				% For making tables fit within page width
+\usepackage{url}					% For \url{}
+
+\newcommand{\colvect}[2]{
+	\ensuremath{\big[\begin{smallmatrix}#1\\#2\end{smallmatrix}\big]}
+}
+
+\newcommand{\longtabletext}[1]{
+	\parbox[c]{\hsize}{\vspace*{1mm} #1 \vspace*{1mm}}
+}
+
+% The \vspace command inside the \title command is used to reduce
+% the space between the title and the author lines.
+\title{Abstract - Gaussian Mixture Model for Voice Conversion}
+\author{
+	Caleb Kaiji Lu \\
+	{\tt caleb.lu@sv.cmu.edu}
+	\and
+	Tyler Nuanes \\
+	{\tt tyler.nuanes@sv.cmu.edu}
+	\and
+	Serhan Oztekin \\
+	{\tt serhan.oztekin@sv.cmu.edu}
+	\and
+	Nanshu Wang \\
+	{\tt nanshu.wang@sv.cmu.edu}
+}
+\date{}
+
+\begin{document}
+
+\maketitle
+Voice conversion is defined as modifying a source speaker’s voice to sound as though it were produced by a target speaker. Such technology can have applications ranging from entertainment to speaker recognition. It would be beneficial to games and videos to reproduce the voices of famous actors or actresses, especially in translating media to different languages. It may also help in the grieving process—--how many people wish they could hear a loved one’s voice one last time after they pass? 
+
+Voice conversion is a challenging goal, and a fully successful algorithm has so far proved elusive. Speech signals are created in a complex process involving vibrations of vocal chords and frequency filtering by the vocal tract. In addition, our auditory process is nonlinear, involving multiple frequency bands in the cochlea. Humans pick up characteristics of individual voices in frequencies ranging from 3 Hz to 10 kHz. Instead of attempting to develop a new algorithm, we focused our project on delving into a fundamental algorithm in the field and worked to reproduce it. 
+
+Our contribution is a complete implementation of the voice conversion work-flow: feature extraction of the fundamental frequency $f_0$ and mell's cepstrum $mcep$; dynamic time wrapping (DTW) to align the speech of our target and source speaker in the training data; $F_0$ transformation to match the fundamental frequency to the target speaker; VQ and Full Conversion algorithms using Gaussian Mixture Models. Our training set includes 150 parallel audios from a female source and a male target. The results show that the \textit{MelCD}, a measure of distortion, of Full Conversion is 37.66,  and \textit{MelCD} of VQ Conversion is 39.53. The Full Conversion reduced  \textit{MelCD} by 4.77 compared to the original distortion between source and target. Take this opportunity to listen to the audio signals yourself and hear what is possible!
+\end{document}
