@@ -1,4 +1,3 @@
-__author__ = 'gardenia'
 from features import extract_features
 from alignment import align
 from gmm import train_GMM, predict_GMM_VQ, predict_GMM_FULL
